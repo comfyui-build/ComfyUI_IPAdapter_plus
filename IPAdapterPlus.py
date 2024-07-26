@@ -1834,9 +1834,17 @@ class IPAdapterCombineParams:
  Register
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
+
+class IPAdapterApply(IPAdapter):
+    pass
+
+class InsightFaceLoader(IPAdapterInsightFaceLoader):
+    pass
+
 NODE_CLASS_MAPPINGS = {
     # Main Apply Nodes
     "IPAdapter": IPAdapterSimple,
+    "IPAdapterApply": IPAdapterApply, # reback
     "IPAdapterAdvanced": IPAdapterAdvanced,
     "IPAdapterBatch": IPAdapterBatch,
     "IPAdapterFaceID": IPAdapterFaceID,
@@ -1859,6 +1867,7 @@ NODE_CLASS_MAPPINGS = {
     "IPAdapterUnifiedLoader": IPAdapterUnifiedLoader,
     "IPAdapterUnifiedLoaderFaceID": IPAdapterUnifiedLoaderFaceID,
     "IPAdapterModelLoader": IPAdapterModelLoader,
+    "InsightFaceLoader": InsightFaceLoader, # reback
     "IPAdapterInsightFaceLoader": IPAdapterInsightFaceLoader,
     "IPAdapterUnifiedLoaderCommunity": IPAdapterUnifiedLoaderCommunity,
 
