@@ -1857,6 +1857,9 @@ class IPAdapterApplyEncoded(IPAdapterApply):
 class InsightFaceLoader(IPAdapterInsightFaceLoader):
     pass
 
+class IPAdapterApplyFaceID(IPAdapterFaceID):
+    pass
+
 NODE_CLASS_MAPPINGS = {
     # Main Apply Nodes
     "IPAdapter": IPAdapterSimple,
@@ -1865,6 +1868,7 @@ NODE_CLASS_MAPPINGS = {
     "IPAdapterAdvanced": IPAdapterAdvanced,
     "IPAdapterBatch": IPAdapterBatch,
     "IPAdapterFaceID": IPAdapterFaceID,
+    "IPAdapterApplyFaceID": IPAdapterApplyFaceID, # reback
     "IPAAdapterFaceIDBatch": IPAAdapterFaceIDBatch,
     "IPAdapterTiled": IPAdapterTiled,
     "IPAdapterTiledBatch": IPAdapterTiledBatch,
