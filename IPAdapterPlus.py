@@ -642,23 +642,6 @@ class IPAdapterInsightFaceLoader:
     def load_insightface(self, provider):
         return (insightface_loader(provider),)
 
-
-class InsightFaceLoader(IPAdapterInsightFaceLoader):
-    @classmethod
-    def INPUT_TYPES(s):
-        return {
-            "required": {
-                "provider": (["CPU", "CUDA", "ROCM"], ),
-            },
-        }
-
-    RETURN_TYPES = ("INSIGHTFACE",)
-    FUNCTION = "load_insightface"
-    CATEGORY = "ipadapter/loaders"
-
-    def load_insightface(self, provider):
-        return (insightface_loader(provider),)
-
 """
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  Main Apply Nodes
@@ -710,9 +693,6 @@ class IPAdapterSimple:
             raise Exception("CLIPVision model not present in the pipeline. Please load the models with the IPAdapterUnifiedLoader node.")
 
         return ipadapter_execute(model.clone(), ipadapter['ipadapter']['model'], ipadapter['clipvision']['model'], **ipa_args)
-
-class IPAdapterApply(IPAdapterSimple):
-    pass
 
 class IPAdapterAdvanced:
     def __init__(self):
@@ -1855,12 +1835,33 @@ class IPAdapterCombineParams:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 
+class IPAdapterApply(IPAdapterSimple):
+    pass
 
+class IPAdapterApplyEncoded(IPAdapterApply):
+    @classmethod
+    def INPUT_TYPES(s):
+        return {
+            "required": {
+                "ipadapter": ("IPADAPTER", ),
+                "embeds": ("EMBEDS",),
+                "model": ("MODEL", ),
+                "weight": ("FLOAT", { "default": 1.0, "min": -1, "max": 3, "step": 0.05 }),
+                "weight_type": (["original", "linear", "channel penalty"], ),
+            },
+            "optional": {
+                "attn_mask": ("MASK",),
+            }
+        }
+
+class InsightFaceLoader(IPAdapterInsightFaceLoader):
+    pass
 
 NODE_CLASS_MAPPINGS = {
     # Main Apply Nodes
     "IPAdapter": IPAdapterSimple,
     "IPAdapterApply": IPAdapterApply, # reback
+    "IPAdapterApplyEncoded": IPAdapterApplyEncoded, # reback
     "IPAdapterAdvanced": IPAdapterAdvanced,
     "IPAdapterBatch": IPAdapterBatch,
     "IPAdapterFaceID": IPAdapterFaceID,
