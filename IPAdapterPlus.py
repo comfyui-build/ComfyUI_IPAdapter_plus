@@ -1913,7 +1913,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
     "IPAdapterAdvanced": "IPAdapter Advanced",
     "IPAdapterBatch": "IPAdapter Batch (Adv.)",
     "IPAdapterFaceID": "IPAdapter FaceID",
-    "IPAAdapterFaceIDBatch": "IPAdapter FaceID Batch",
+    "IPAdapterFaceIDBatch": "IPAdapter FaceID Batch",
     "IPAdapterTiled": "IPAdapter Tiled",
     "IPAdapterTiledBatch": "IPAdapter Tiled Batch",
     "IPAdapterEmbeds": "IPAdapter Embeds",
